@@ -1,3 +1,13 @@
+/*
+ * Código Criado por João Gabriel e Herber Medeiros
+ * 
+ * 
+ * Qualquer cópia deve conter o local de onde foi retirado o código
+ * 
+ * 
+ * Baseado em: http://www.devmedia.com.br/como-criar-um-chat-multithread-com-socket-em-java/33639
+ */
+
 package Server;
 
 import java.io.BufferedReader;
