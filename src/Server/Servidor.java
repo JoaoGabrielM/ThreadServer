@@ -28,6 +28,10 @@ public class Servidor extends Thread {
 	private BufferedReader bfr;
 
 	public Servidor(Socket con) { // Método construtor
+									// recebe um objeto socket como parâmetro e
+									// cria um objeto do tipo BufferedReader,
+									// que aponta para o stream do cliente
+									// socket.
 		this.con = con;
 		try {
 			in = con.getInputStream();
@@ -38,10 +42,8 @@ public class Servidor extends Thread {
 		}
 	}
 
-	/**
-	 * Método run
-	 */
-	public void run() {
+	public void run() { // É acionado toda vez que um cliente novo chega ao
+						// servidor
 
 		try {
 
@@ -52,9 +54,16 @@ public class Servidor extends Thread {
 			clientes.add(bfw);
 			nome = msg = bfr.readLine();
 
-			while (!"Sair".equalsIgnoreCase(msg) && msg != null) {
+			while (!"Sair".equalsIgnoreCase(msg) && msg != null) {// Fica
+																	// verificando
+																	// se há uma
+																	// nova
+																	// mensagem
 				msg = bfr.readLine();
-				sendToAll(bfw, msg);
+				sendToAll(bfw, msg);// Se existir uma nova mensagem ela será
+									// enviada para esse método que irá enviar
+									// para os demais usuários conectados no
+									// chat
 				System.out.println(msg);
 			}
 
@@ -64,19 +73,12 @@ public class Servidor extends Thread {
 		}
 	}
 
-	/***
-	 * Método usado para enviar mensagem para todos os clients
-	 * 
-	 * @param bwSaida
-	 *            do tipo BufferedWriter
-	 * @param msg
-	 *            do tipo String
-	 * @throws IOException
-	 */
 	public void sendToAll(BufferedWriter bwSaida, String msg) throws IOException {
 		BufferedWriter bwS;
 
-		for (BufferedWriter bw : clientes) {
+		for (BufferedWriter bw : clientes) {// Irá percorrer todos os clientes e
+											// irá enviar a mensagem para cada
+											// um deles
 			bwS = (BufferedWriter) bw;
 			if (!(bwSaida == bwS)) {
 				bw.write(nome + " -> " + msg + "\r\n");
