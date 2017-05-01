@@ -21,9 +21,7 @@ import java.io.Writer;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import java.util.Scanner;
 
 public class Servidor extends Thread {
 	private static ArrayList<BufferedWriter> clientes; // usado para armazenar o
@@ -36,6 +34,7 @@ public class Servidor extends Thread {
 	private InputStream in;
 	private InputStreamReader inr;
 	private BufferedReader bfr;
+	private static Scanner scanner = new Scanner(System.in);
 
 	public Servidor(Socket con) { // Método construtor
 									// recebe um objeto socket como parâmetro e
@@ -102,14 +101,11 @@ public class Servidor extends Thread {
 
 		try {
 			// Cria os objetos necessário para instânciar o servidor
-			JLabel lblMessage = new JLabel("Porta do Servidor:");
-			JTextField txtPorta = new JTextField("12345");
-			Object[] texts = { lblMessage, txtPorta };// Informa a porta do
-														// servidor
-			JOptionPane.showMessageDialog(null, texts);
-			server = new ServerSocket(Integer.parseInt(txtPorta.getText()));
+			System.out.println("Porta do Servidor:");
+			String porta = scanner.nextLine();
+			server = new ServerSocket(Integer.parseInt(porta));
 			clientes = new ArrayList<BufferedWriter>();
-			JOptionPane.showMessageDialog(null, "Servidor ativo na porta: " + txtPorta.getText());
+			System.out.println("Servidor ativo na porta: " + porta);
 
 			while (true) {
 				System.out.println("Aguardando conexão...");
