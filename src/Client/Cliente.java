@@ -143,6 +143,7 @@ public class Cliente extends JFrame implements ActionListener, KeyListener {
 		ouw.close();
 		ou.close();
 		socket.close();
+		
 	}
 
 	@Override
@@ -179,14 +180,10 @@ public class Cliente extends JFrame implements ActionListener, KeyListener {
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-	}
+	public void keyReleased(KeyEvent arg0) {}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-	}
+	public void keyTyped(KeyEvent arg0) {}
 
 	public static void main(String[] args) throws IOException {
 
