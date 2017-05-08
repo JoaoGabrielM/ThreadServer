@@ -1,8 +1,8 @@
 /*
- * CÛdigo Criado por Jo„o Gabriel e Herber Medeiros
+ * C√≥digo Criado por Jo√£o Gabriel e Herber Medeiros
  * 
  * 
- * Qualquer cÛpia deve conter o local de onde foi retirado o cÛdigo
+ * Qualquer c√≥pia deve conter o local de onde foi retirado o c√≥digo
  * 
  * 
  * Baseado em: http://www.devmedia.com.br/como-criar-um-chat-multithread-com-socket-em-java/33639
@@ -28,7 +28,7 @@ public class Servidor extends Thread {
 														// BufferedWriter de
 														// cada cliente
 														// conectado
-	private static ServerSocket server; // usado para a criaÁ„o do servidor
+	private static ServerSocket server; // usado para a cria√ß√£o do servidor
 	private String nome;
 	private Socket con;
 	private InputStream in;
@@ -36,8 +36,8 @@ public class Servidor extends Thread {
 	private BufferedReader bfr;
 	private static Scanner scanner = new Scanner(System.in);
 
-	public Servidor(Socket con) { // MÈtodo construtor
-									// recebe um objeto socket como par‚metro e
+	public Servidor(Socket con) { // M√©todo construtor
+									// recebe um objeto socket como par√¢metro e
 									// cria um objeto do tipo BufferedReader,
 									// que aponta para o stream do cliente
 									// socket.
@@ -51,7 +51,7 @@ public class Servidor extends Thread {
 		}
 	}
 
-	public void run() { // … acionado toda vez que um cliente novo chega ao
+	public void run() { // √â acionado toda vez que um cliente novo chega ao
 						// servidor
 
 		try {
@@ -65,13 +65,13 @@ public class Servidor extends Thread {
 
 			while (!"Sair".equalsIgnoreCase(msg) && msg != null) {// Fica
 																	// verificando
-																	// se h· uma
+																	// se h√° uma
 																	// nova
 																	// mensagem
 				msg = bfr.readLine();
-				sendToAll(bfw, msg);// Se existir uma nova mensagem ela ser·
-									// enviada para esse mÈtodo que ir· enviar
-									// para os demais usu·rios conectados no
+				sendToAll(bfw, msg);// Se existir uma nova mensagem ela ser√°
+									// enviada para esse m√©todo que ir√° enviar
+									// para os demais usu√°rios conectados no
 									// chat
 				System.out.println(msg);
 			}
@@ -85,22 +85,26 @@ public class Servidor extends Thread {
 	public void sendToAll(BufferedWriter bwSaida, String msg) throws IOException {
 		BufferedWriter bwS;
 
-		for (BufferedWriter bw : clientes) {// Ir· percorrer todos os clientes e
-											// ir· enviar a mensagem para cada
-											// um deles
-			bwS = (BufferedWriter) bw;
-			if (!(bwSaida == bwS)) {
-				bw.write(nome + " -> " + msg + "\r\n");
-				bw.flush();
+		if (clientes.size() == 1) {
+			for (BufferedWriter bw : clientes) {	// Ir√° percorrer todos os
+								// clientes e
+								// ir√° enviar a mensagem para
+								// cada
+								// um deles
+				bwS = (BufferedWriter) bw;
+				if (!(bwSaida == bwS)) {
+					bw.write(nome + " -> " + msg + "\r\n");
+					bw.flush();
+				}
 			}
 		}
 	}
 
-	public static void main(String[] args) {// Far· a configuraÁ„o do servidor
+	public static void main(String[] args) {// Far√° a configura√ß√£o do servidor
 											// Socket e sua respectiva porta
 
 		try {
-			// Cria os objetos necess·rio para inst‚nciar o servidor
+			// Cria os objetos necess√°rio para inst√¢nciar o servidor
 			System.out.println("Porta do Servidor:");
 			String porta = scanner.nextLine();
 			server = new ServerSocket(Integer.parseInt(porta));
@@ -108,8 +112,8 @@ public class Servidor extends Thread {
 			System.out.println("Servidor ativo na porta: " + porta);
 
 			while (true) {
-				System.out.println("Aguardando conex„o...");
-				Socket con = server.accept();// Fica aguardando uma nova conex„o
+				System.out.println("Aguardando conex√£o...");
+				Socket con = server.accept();// Fica aguardando uma nova conex√£o
 				System.out.println("Cliente conectado...");
 				Thread t = new Servidor(con);
 				t.start();
@@ -119,5 +123,5 @@ public class Servidor extends Thread {
 
 			e.printStackTrace();
 		}
-	}// Fim do mÈtodo main
+	}// Fim do m√©todo main
 } // Fim da classe
